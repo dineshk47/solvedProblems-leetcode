@@ -1,0 +1,25 @@
+Given two integer arrays nums1 and nums2, 
+return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+nums1 = [1,2,2,1], nums2 = [2,2]
+
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        # intitalizing a dictionary and list
+        ht = {}
+        rs = []
+        # iterating through nums1 and adding the elements to dict if not present else updating the value to 2
+        for n in nums1:
+            if n not in ht:
+                ht[n] = 1
+            else:
+                ht[n] = ht[n]+1
+        # check the elements in nums2 present in dict if yes then append to the list and check the elm value in dict if 1 then pop else reduce to 1
+        for n in nums2:
+            if n in ht:
+                rs.append(n)
+                if ht[n] == 1:
+                    ht.pop(n)
+                else:
+                    ht[n] = ht[n]-1
+        return rs
